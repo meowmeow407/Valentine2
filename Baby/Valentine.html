@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Bhawana ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("love.jpeg") no-repeat center center/cover;
+}
+
+/* Dark overlay */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 0;
+}
+
+/* Main card */
+.card {
+    background: url("meow.jpeg") no-repeat center center/cover;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 400px;
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    z-index: 0;
+}
+
+.card * {
+    position: relative;
+    z-index: 2;
+}
+
+
+h1 { color: #ff4b5c; }
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background-color: #ff4b5c;
+    color: white;
+}
+
+#noBtn { background-color: #ccc; }
+
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ff4b5c;
+}
+
+/* Floating hearts */
+.heart, .flower {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+    z-index: 1;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Envelope letter */
+.envelope {
+    display: none;
+    position: fixed;
+    width: 340px;
+    height: 240px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    z-index: 5;
+    padding: 20px;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.letter-text {
+    font-size: 14px;
+    white-space: pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="mainCard">
+    <h1>Bhawana ❤️</h1>
+    <p>Will You Be My Valentine?</p>
+
+    <button id="yesBtn" onclick="openLetter()">Yes 💖</button>
+    <button id="noBtn" onclick="sayNo()">No 😢</button>
+
+    <div id="message"></div>
+</div>
+
+<div class="envelope" id="envelope">
+    <div class="letter-text" id="typedText"></div>
+</div>
+
+<script>
+/* No button logic */
+let noCount = 0;
+
+function sayNo() {
+    noCount++;
+    const messages = [
+        "Are you sure? 🥺",
+        "After 4 years?? 😭",
+        "Think again... 💔",
+        "Please don't say no 😢",
+        "Last chance 😔"
+    ];
+
+    if (noCount <= messages.length) {
+        document.getElementById("message").innerHTML = messages[noCount - 1];
+    } else {
+        document.getElementById("message").innerHTML =
+        "You have no choice now 😈❤️";
+        document.getElementById("noBtn").style.display = "none";
+    }
+}
+
+/* Open letter */
+function openLetter() {
+    document.getElementById("mainCard").style.display = "none";
+    document.getElementById("envelope").style.display = "block";
+    typeLetter();
+}
+
+const letterContent = `My Dearest Bhawana,
+
+Four years ago, I found more than love —
+I found my best friend, my happiness, my forever.
+
+Every day with you feels like a blessing.
+You are my peace, my heart, my everything.
+
+I will always choose you ❤️`;
+
+let i = 0;
+function typeLetter() {
+    if (i < letterContent.length) {
+        document.getElementById("typedText").innerHTML += letterContent.charAt(i);
+        i++;
+        setTimeout(typeLetter, 40);
+    }
+}
+
+/* Floating hearts */
+/* Massive Heart Storm ❤️ */
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "-20px";
+    heart.style.fontSize = (Math.random() * 25 + 15) + "px";
+    heart.style.animationDuration = (Math.random() * 4 + 4) + "s";
+    heart.style.opacity = Math.random();
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 9000);
+}
+
+/* MORE HEARTS */
+setInterval(createHeart, 120);
+
+
+/* Falling flowers */
+function createFlower() {
+    const flower = document.createElement("div");
+    flower.className = "flower";
+    flower.innerHTML = "🌸";
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (Math.random() * 4 + 4) + "s";
+    document.body.appendChild(flower);
+    setTimeout(() => flower.remove(), 8000);
+}
+setInterval(createFlower, 150);
+</script>
+
+</body>
+</html>
