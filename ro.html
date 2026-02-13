@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Proposal ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 400px;
+    position: relative;
+    z-index: 2;
+}
+
+h1 { color: #ff4b5c; }
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background-color: #ff4b5c;
+    color: white;
+}
+
+#yesBtn:hover { transform: scale(1.1); }
+
+#noBtn { background-color: #ccc; }
+
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ff4b5c;
+}
+
+.counter {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+.heart {
+    position: absolute;
+    color: #ff4b5c;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+    <source src="perfect.mp3" type="audio/mp3">
+</audio>
+
+<div class="card">
+    <h1>Rohit ❤️</h1>
+    <p>Will You Be My Valentine?</p>
+
+    <div class="counter" id="timeTogether"></div>
+
+    <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+    <button id="noBtn" onclick="sayNo()">No 😢</button>
+
+    <div id="message"></div>
+
+    <p style="margin-top:20px; cursor:pointer; color:#888;" onclick="showLetter()">
+        💌 Click here for a secret message
+    </p>
+
+    <div id="letter" style="display:none; margin-top:10px; font-size:14px;">
+        Rohit,  
+        Spending a year with you feels like the most beautiful dream.  
+        You are my peace, my happiness, and my forever.  
+        I would choose you in every lifetime. ❤️
+        So, i wanna ask for ur heart....
+        Will u love me rohit????  
+    </div>
+</div>
+
+<canvas id="fireworks"></canvas>
+
+<script>
+let noCount = 0;
+
+function sayYes() {
+    document.getElementById("message").innerHTML =
+    "You just made these 4 years even more special 💕 I love you Rohit ❤️";
+    startFireworks();
+}
+
+function sayNo() {
+    noCount++;
+    const messages = [
+        "Are you sure? 🥺",
+        "Really?? 😭",
+        "Think again Rohit... 💔",
+        "Don't break my heart 😢",
+        "Last chance 😔"
+    ];
+
+    if (noCount <= messages.length) {
+        document.getElementById("message").innerHTML = messages[noCount - 1];
+    } else {
+        document.getElementById("message").innerHTML =
+        "You have no choice now 😈❤️";
+        document.getElementById("noBtn").style.display = "none";
+    }
+}
+
+// 4 Year Counter
+const startDate = new Date("2022-02-13"); // CHANGE THIS to your real anniversary date
+const today = new Date();
+const diffTime = today - startDate;
+const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+document.getElementById("timeTogether").innerHTML =
+"We have been together for " + diffDays + " days ❤️";
+
+// Secret letter
+function showLetter() {
+    document.getElementById("letter").style.display = "block";
+}
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 300);
+
+// Fireworks
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function startFireworks() {
+    for (let i = 0; i < 120; i++) {
+        ctx.beginPath();
+        ctx.arc(
+            Math.random() * canvas.width,
+            Math.random() * canvas.height,
+            3,
+            0,
+            Math.PI * 2
+        );
+        ctx.fillStyle = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+        ctx.fill();
+    }
+}
+</script>
+
+</body>
+</html>
